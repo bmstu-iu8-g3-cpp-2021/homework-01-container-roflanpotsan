@@ -261,8 +261,8 @@ class unordered_set {
   }
 
   bool operator==(const unordered_set<T> &new_set) {
-    for (const auto &value : new_set) {
-      if (!(this->has(value))) return false;
+    for (auto i = new_set.begin(); i != new_set.end(); ++i) {
+      if (!(this->has(*i))) return false;
     }
     return true;
   }
@@ -391,8 +391,8 @@ void swap(unordered_set<T> &a, unordered_set<T> &b) {
 template <class T>
 bool operator==(const unordered_set<T> &new_set,
                 const unordered_set<T> &old_set) {
-  for (const auto &value : new_set) {
-    if (!(old_set.has(value))) return false;
+  for (auto i = new_set.begin(); i != new_set.end(); ++i) {
+    if (!(old_set.has(*i))) return false;
   }
   return true;
 }
