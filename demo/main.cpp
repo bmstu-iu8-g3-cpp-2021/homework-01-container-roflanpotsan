@@ -1,5 +1,5 @@
 #include <my_unordered_set.h>
-#include <algorithm>
+/*#include <algorithm>
 #include <vector>
 int main() {
   std::vector<int> abc = {1, 2, 3, 4, 5};
@@ -9,4 +9,4 @@ int main() {
   //std::cout << *std::find_if(x.begin(), x.end(), [](int val){return val % 2 == 0;});
   //std::for_each(x.begin(), x.end(), [](int val){if(val % 2 == 0) std::cout << val << '\n';});
 
-}
+}*/
