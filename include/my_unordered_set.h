@@ -1,6 +1,4 @@
-//
-// Created by Фёдор Долматов on 07.05.2022.
-//
+// Copyright 2022 roflanpotsan l1sZ@ya.ru
 
 #ifndef TEMPLATE_MY_UNORDERED_SET_H
 #define TEMPLATE_MY_UNORDERED_SET_H
@@ -143,6 +141,10 @@ class unordered_set {
 
  public:
   class Iterator : public std::forward_iterator_tag {
+
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+
     typename SimpleList<T>::Iterator pointer =
         typename SimpleList<T>::Iterator(nullptr);
     SimpleList<T> *array, *begin;

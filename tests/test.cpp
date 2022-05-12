@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2022 roflanpotsan l1sZ@ya.ru
 
 #include <gtest/gtest.h>
 #include <my_unordered_set.h>
