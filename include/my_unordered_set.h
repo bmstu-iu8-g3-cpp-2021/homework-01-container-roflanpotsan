@@ -24,7 +24,7 @@ class SimpleList {
   size_t size = 0;
 
  public:
-  class Iterator {
+  class Iterator : public std::forward_iterator_tag{
     Node *pointer;
 
    public:
@@ -141,9 +141,6 @@ class unordered_set {
 
  public:
   class Iterator : public std::forward_iterator_tag {
-
-    using iterator_category = std::forward_iterator_tag;
-    using difference_type   = std::ptrdiff_t;
 
     typename SimpleList<T>::Iterator pointer =
         typename SimpleList<T>::Iterator(nullptr);

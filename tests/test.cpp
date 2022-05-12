@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <my_unordered_set.h>
-
+#include<algorithm>
 #include <vector>
 TEST(Unordered_Set, Construct) {
   // initializer list constructor
@@ -101,5 +101,5 @@ TEST(Unordered_Set, Find) {
 }
 TEST(Unordered_Set, STL) {
   unordered_set<int> first = {1,11,3,5,4,7,9};
-  EXPECT_EQ(*find_if(first.begin(), first.end(), [](int val){return val % 2 == 0;}), 4);
+  EXPECT_EQ(*std::find_if(first.begin(), first.end(), [](int val){return val % 2 == 0;}), 4);
 }
