@@ -145,7 +145,13 @@ class unordered_set {
  public:
   class Iterator : public std::iterator<std::forward_iterator_tag, T> {
 
-    typename SimpleList<T>::Iterator pointer =
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = T;
+    using pointer           = typename SimpleList<T>::Iterator;  // or also value_type*
+    using reference         = T&;  // or also value_type&
+
+    pointer ptr =
         typename SimpleList<T>::Iterator(nullptr);
     SimpleList<T> *array, *begin;
     size_t max_size = 0;
@@ -157,7 +163,7 @@ class unordered_set {
       array = arr;
       max_size = new_size;
       if (max_size == 0) {
-        pointer = typename SimpleList<T>::Iterator(nullptr);
+        ptr = typename SimpleList<T>::Iterator(nullptr);
       } else {
         if ((*array).empty() && array != begin + max_size) {
           while (std::next(array) != begin + max_size &&
@@ -168,20 +174,20 @@ class unordered_set {
         }
         if (array == begin + max_size)
           if ((*array).empty())
-            pointer = typename SimpleList<T>::Iterator(nullptr);
+            ptr = typename SimpleList<T>::Iterator(nullptr);
           else
-            pointer = (*array).begin();
+            ptr = (*array).begin();
         else
-          pointer = (*array).begin();
+          ptr = (*array).begin();
       }
     };
 
     ~Iterator() = default;
-    T operator*() { return *pointer; }
+    T operator*() { return *ptr; }
     Iterator &operator++() {
-      if (pointer != typename SimpleList<T>::Iterator(nullptr)) {
-        if (pointer->getNext() != nullptr) {
-          ++pointer;
+      if (ptr != typename SimpleList<T>::Iterator(nullptr)) {
+        if (ptr->getNext() != nullptr) {
+          ++ptr;
         } else {
           while (std::next(array) != begin + max_size &&
                  (*std::next(array)).empty()) {
@@ -190,12 +196,12 @@ class unordered_set {
           array = std::next(array);
           if (array == begin + max_size) {
             if ((*array).empty()) {
-              pointer = typename SimpleList<T>::Iterator(nullptr);
+              ptr = typename SimpleList<T>::Iterator(nullptr);
             } else {
-              pointer = (*array).begin();
+              ptr = (*array).begin();
             }
           } else
-            pointer = (*array).begin();
+            ptr = (*array).begin();
         }
       }
       return *this;
@@ -207,10 +213,10 @@ class unordered_set {
       return tmp;
     }
     friend bool operator==(const Iterator &a, const Iterator &b) {
-      return a.pointer == b.pointer;
+      return a.ptr == b.ptr;
     };
     friend bool operator!=(const Iterator &a, const Iterator &b) {
-      return a.pointer != b.pointer;
+      return a.ptr != b.ptr;
     };
   };
 
