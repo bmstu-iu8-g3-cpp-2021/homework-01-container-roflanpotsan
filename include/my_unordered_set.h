@@ -129,6 +129,9 @@ class unordered_set {
   void rehash() {
     size_t new_size = table_size * 2;
     auto *new_table = new SimpleList<T>[new_size];
+    for (size_t i = 0; i < new_size; i++){
+      new_table[i] = SimpleList<T>();
+    }
     for (size_t i = 0; i < table_size; i++) {
       for (const auto &value : hash_table[i]) {
         new_table[Hash{}(value) % new_size].push_back(value);
@@ -219,6 +222,9 @@ class unordered_set {
   unordered_set(std::initializer_list<T> values) {
     table_size = values.size();
     hash_table = new SimpleList<T>[table_size];
+    for (size_t i = 0; i < table_size; i++){
+      hash_table[i] = SimpleList<T>();
+    }
     for (const auto &value : values) {
       this->insert(value);
     }
@@ -227,6 +233,9 @@ class unordered_set {
   unordered_set(const unordered_set &values) {
     table_size = values.capacity();
     hash_table = new SimpleList<T>[table_size];
+    for (size_t i = 0; i < table_size; i++){
+      hash_table[i] = SimpleList<T>();
+    }
     for (auto i = values.begin(); i != values.end(); i++) {
       this->insert(*i);
     }
@@ -243,6 +252,9 @@ class unordered_set {
     el_count = 0;
     delete[] hash_table;
     hash_table = new SimpleList<T>[table_size];
+    for (size_t i = 0; i < table_size; i++){
+      hash_table[i] = SimpleList<T>();
+    }
     for (auto i = values.begin(); i != values.end(); ++i) {
       this->insert(*i);
     }
@@ -254,6 +266,9 @@ class unordered_set {
     el_count = 0;
     delete[] hash_table;
     hash_table = new SimpleList<T>[table_size];
+    for (size_t i = 0; i < table_size; i++){
+      hash_table[i] = SimpleList<T>();
+    }
     for (const auto &value : values) {
       this->insert(value);
     }
