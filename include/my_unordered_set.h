@@ -221,9 +221,6 @@ class unordered_set {
   unordered_set(std::initializer_list<T> values) {
     table_size = values.size();
     hash_table = new SimpleList<T>[table_size + 1];
-    for (size_t i = 0; i <= table_size; i++){
-      hash_table[i] = SimpleList<T>();
-    }
     for (const auto &value : values) {
       this->insert(value);
     }
@@ -232,9 +229,6 @@ class unordered_set {
   unordered_set(const unordered_set &values) {
     table_size = values.capacity();
     hash_table = new SimpleList<T>[table_size + 1];
-    for (size_t i = 0; i < table_size; i++){
-      hash_table[i] = SimpleList<T>();
-    }
     for (auto i = values.begin(); i != values.end(); i++) {
       this->insert(*i);
     }
@@ -251,9 +245,6 @@ class unordered_set {
     el_count = 0;
     delete[] hash_table;
     hash_table = new SimpleList<T>[table_size + 1];
-    for (size_t i = 0; i < table_size; i++){
-      hash_table[i] = SimpleList<T>();
-    }
     for (auto i = values.begin(); i != values.end(); ++i) {
       this->insert(*i);
     }
@@ -265,9 +256,6 @@ class unordered_set {
     el_count = 0;
     delete[] hash_table;
     hash_table = new SimpleList<T>[table_size + 1];
-    for (size_t i = 0; i < table_size; i++){
-      hash_table[i] = SimpleList<T>();
-    }
     for (const auto &value : values) {
       this->insert(value);
     }
