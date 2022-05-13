@@ -24,22 +24,28 @@ class SimpleList {
   size_t size = 0;
 
  public:
-  class Iterator : public std::forward_iterator_tag{
-    Node *pointer;
+  class Iterator : public std::iterator<std::forward_iterator_tag, T>{
+
+    using iterator_category =  std::forward_iterator_tag ;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = T;
+    using pointer           = Node*;  // or also value_type*
+    using reference         = T&;  // or also value_type&
+    pointer ptr;
 
    public:
-    explicit Iterator(Node *new_pointer) : pointer(new_pointer){};
-    T operator*() { return pointer->getData(); }
-    Node *operator->() { return pointer; }
+    explicit Iterator(pointer new_pointer) : ptr(new_pointer){};
+    T operator*() { return ptr->getData(); }
+    Node *operator->() { return ptr; }
     Iterator &operator++() {
-      pointer = pointer->getNext();
+      ptr = ptr->getNext();
       return *this;
     }
     friend bool operator==(const Iterator &a, const Iterator &b) {
-      return a.pointer == b.pointer;
+      return a.ptr == b.ptr;
     };
     friend bool operator!=(const Iterator &a, const Iterator &b) {
-      return a.pointer != b.pointer;
+      return a.ptr != b.ptr;
     };
   };
 
@@ -145,11 +151,11 @@ class unordered_set {
  public:
   class Iterator : public std::iterator<std::forward_iterator_tag, T> {
 
-    typedef std::forward_iterator_tag iterator_category;
-    typedef std::ptrdiff_t difference_type;
-    typedef T value_type;
-    typedef typename SimpleList<T>::Iterator pointer;
-    typedef T& reference;
+    using iterator_category =  std::forward_iterator_tag ;
+    using difference_type   = std::ptrdiff_t;
+    using value_type        = T;
+    using pointer           = typename SimpleList<T>::Iterator;  // or also value_type*
+    using reference         = T&;  // or also value_type&
 
     pointer ptr =
         typename SimpleList<T>::Iterator(nullptr);
