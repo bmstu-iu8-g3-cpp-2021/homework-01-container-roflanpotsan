@@ -31,8 +31,7 @@ find_package(GTest CONFIG REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-)
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp include/my_unordered_set.h)
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
@@ -59,7 +58,7 @@ if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/coverage/cmake")
   find_package(codecov)
-  add_coverage(${PROJECT_NAME})
+  # add_coverage(${PROJECT_NAME})
   add_coverage(tests)
   coverage_evaluate()
 endif()
