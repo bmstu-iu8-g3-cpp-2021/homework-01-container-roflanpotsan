@@ -99,7 +99,3 @@ TEST(Unordered_Set, Find) {
   first.insert(101);
   EXPECT_EQ(*first.find(101), 101);
 }
-TEST(Unordered_Set, STL) {
-  unordered_set<int> first = {1,11,3,5,4,7,9};
-  EXPECT_EQ(*std::find_if(first.begin(), first.end(), [](int val){return val % 2 == 0;}), 4);
-}

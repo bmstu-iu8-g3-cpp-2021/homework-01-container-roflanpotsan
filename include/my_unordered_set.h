@@ -24,28 +24,22 @@ class SimpleList {
   size_t size = 0;
 
  public:
-  class Iterator : public std::iterator<std::forward_iterator_tag, T>{
-
-    typedef std::forward_iterator_tag  iterator_category;
-    using difference_type   = std::ptrdiff_t;
-    using value_type        = T;
-    using pointer           = Node*;  // or also value_type*
-    using reference         = T&;  // or also value_type&
-    pointer ptr;
+  class Iterator {
+    Node *pointer;
 
    public:
-    explicit Iterator(pointer new_pointer) : ptr(new_pointer){};
-    T operator*() { return ptr->getData(); }
-    Node *operator->() { return ptr; }
+    explicit Iterator(Node *new_pointer) : pointer(new_pointer){};
+    T operator*() { return pointer->getData(); }
+    Node *operator->() { return pointer; }
     Iterator &operator++() {
-      ptr = ptr->getNext();
+      pointer = pointer->getNext();
       return *this;
     }
     friend bool operator==(const Iterator &a, const Iterator &b) {
-      return a.ptr == b.ptr;
+      return a.pointer == b.pointer;
     };
     friend bool operator!=(const Iterator &a, const Iterator &b) {
-      return a.ptr != b.ptr;
+      return a.pointer != b.pointer;
     };
   };
 
@@ -135,7 +129,7 @@ class unordered_set {
   void rehash() {
     size_t new_size = table_size * 2;
     auto *new_table = new SimpleList<T>[new_size + 1];
-    for (size_t i = 0; i <= new_size; i++){
+    for (size_t i = 0; i <= new_size; i++) {
       new_table[i] = SimpleList<T>();
     }
     for (size_t i = 0; i < table_size; i++) {
@@ -150,14 +144,7 @@ class unordered_set {
 
  public:
   class Iterator : public std::iterator<std::forward_iterator_tag, T> {
-
-    typedef std::forward_iterator_tag  iterator_category;
-    using difference_type   = std::ptrdiff_t;
-    using value_type        = T;
-    using pointer           = typename SimpleList<T>::Iterator;  // or also value_type*
-    using reference         = T&;  // or also value_type&
-
-    pointer ptr =
+    typename SimpleList<T>::Iterator ptr =
         typename SimpleList<T>::Iterator(nullptr);
     SimpleList<T> *array, *begin;
     size_t max_size = 0;
@@ -226,9 +213,7 @@ class unordered_set {
     };
   };
 
-  unordered_set() {
-    hash_table = nullptr;
-  }
+  unordered_set() { hash_table = nullptr; }
 
   unordered_set(std::initializer_list<T> values) {
     table_size = values.size();
