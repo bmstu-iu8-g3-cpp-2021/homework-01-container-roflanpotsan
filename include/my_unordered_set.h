@@ -143,7 +143,7 @@ class unordered_set {
   }
 
  public:
-  class Iterator : public std::iterator<std::forward_iterator_tag, T> {
+  class Iterator {
     typename SimpleList<T>::Iterator ptr =
         typename SimpleList<T>::Iterator(nullptr);
     SimpleList<T> *array, *begin;
