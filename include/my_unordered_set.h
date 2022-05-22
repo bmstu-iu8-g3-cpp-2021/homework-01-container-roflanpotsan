@@ -143,13 +143,19 @@ class unordered_set {
   }
 
  public:
-  class Iterator : public std::iterator<std::forward_iterator_tag, T> {
+  class Iterator {
     typename SimpleList<T>::Iterator ptr =
         typename SimpleList<T>::Iterator(nullptr);
     SimpleList<T> *array, *begin;
     size_t max_size = 0;
 
    public:
+    using difference_type = std::ptrdiff_t;
+    using value_type = T;
+    using pointer = const T *;
+    using reference = const T &;
+    using iterator_category = std::forward_iterator_tag;
+
     explicit Iterator(SimpleList<T> *new_begin, SimpleList<T> *arr,
                       size_t new_size) {
       begin = new_begin;
